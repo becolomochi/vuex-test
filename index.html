@@ -6,16 +6,16 @@
 </head>
 <body>
   <div id="app">
-    <p>{{count}}</p>
+    <!-- <p>{{count}}</p>
     <p>
       <button @click="increment">+</button>
       <button @click="decrement">-</button>
-    </p>
+    </p> -->
   </div>
   <script src="https://cdn.jsdelivr.net/npm/vue"></script>
   <script src="https://unpkg.com/vuex@2.0.0"></script>
   <script>
-    const store = new Vuex.Store({
+  const store = new Vuex.Store({
       state: {
         count: 0
       },
@@ -30,24 +30,49 @@
     })
     // store.commit('increment')
     // console.log(store.state.count) // -> 1
-    
-    new Vue({
-      el: '#app',
-      computed: {
-        count: function() {
-          return store.state.count
-        }
-      },
-      // actions
-      methods: {
-        increment: function() {
-          store.commit('increment')
-        },
-        decrement: function() {
-          store.commit('decrement')
-        }
+
+  // Counter コンポーネントをつくってみましょう
+  const Counter = {
+    template: `
+      <div>
+        <p>{{ count }}</p>
+        <p><button @click="increment">+</button><button @click="decrement">-</button></p>
+      </div>`,
+    computed: {
+      count () {
+        return store.state.count
       }
-    })
+    },
+    // actions
+    methods: {
+      increment: function() {
+        store.commit('increment')
+      },
+      decrement: function() {
+        store.commit('decrement')
+      }
+    }
+  }
+  const app = new Vue({
+    el: '#app',
+    // "store" オプションで指定されたストアは、全ての子コンポーネントに注入されます
+    store,
+    components: { Counter },
+    template: `
+      <div class="app">
+        <counter></counter>
+      </div>
+    `,
+  })
+
+    // new Vue({
+    //   el: '#app',
+    //   computed: {
+    //     count: function() {
+    //       return store.state.count
+    //     }
+    //   },
+    // })
 
   </script>
 </body>
