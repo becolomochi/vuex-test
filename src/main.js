@@ -4,6 +4,17 @@ import App from './App.vue'
 
 Vue.use(Vuex)
 
+const store = new Vuex.Store({
+  state: {
+    count: 0
+  },
+  mutations: {
+    increment (state) {
+      state.count++
+    }
+  }
+})
+
 new Vue({
   el: '#app',
   render: h => h(App)
