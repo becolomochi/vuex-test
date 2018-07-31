@@ -11,7 +11,8 @@
   <script>
   const store = new Vuex.Store({
       state: {
-        count: 0
+        count: 0,
+        input: 'abc'
       },
       mutations: {
         increment(state) {
@@ -19,10 +20,33 @@
         },
         decrement(state) {
           state.count--
+        },
+        reverseText(state) {
+          // state.input += 'aaaaa'
+          state.input = state.input.split('').reverse().join('');
         }
       }
     })
 
+  // Inputs コンポーネント
+  const Inputs = {
+    template: `
+      <div>
+        <p><input type="text" v-model="input"></p>
+        <p><button @click="reverseText">reverse</button></p>
+      </div>
+    `,
+    computed: {
+      input: function() {
+        return this.$store.state.input
+      }
+    },
+    methods: {
+      reverseText: function() {
+        store.commit('reverseText')
+      }
+    }
+  }
   // Counter コンポーネント
   const Counter = {
     template: `
@@ -49,10 +73,11 @@
     el: '#app',
     // "store" オプションで指定されたストアは、全ての子コンポーネントに注入されます
     store,
-    components: { Counter },
+    components: { Counter, Inputs },
     template: `
       <div class="app">
         <counter></counter>
+        <inputs></inputs>
       </div>
     `,
   })
