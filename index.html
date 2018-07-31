@@ -37,12 +37,12 @@
       </div>
     `,
     computed: {
-      input: function() {
+      input() {
         return this.$store.state.input
       }
     },
     methods: {
-      reverseText: function() {
+      reverseText() {
         store.commit('reverseText')
       }
     }
@@ -55,16 +55,16 @@
         <p><button @click="increment">+</button><button @click="decrement">-</button></p>
       </div>`,
     computed: {
-      count () {
+      count() {
         return this.$store.state.count
       }
     },
     // actions
     methods: {
-      increment: function() {
+      increment() {
         store.commit('increment')
       },
-      decrement: function() {
+      decrement() {
         store.commit('decrement')
       }
     }
