@@ -15,8 +15,23 @@ const store = new Vuex.Store({
     }
   }
 })
+const Counter = {
+  template: `<div>{{ count }}</div>`,
+  computed: {
+    count () {
+      return this.$store.state.count
+    }
+  }
+}
 
 new Vue({
   el: '#app',
+  store,
+  components: { Counter },
+  template: ` 
+  <div class="app">
+    <counter></counter>
+  </div>
+  `,
   render: h => h(App)
 })
