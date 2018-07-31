@@ -4,34 +4,28 @@ import App from './App.vue'
 
 Vue.use(Vuex)
 
-// ストアの作成
 const store = new Vuex.Store({
   state: {
-    count: 0
+    count: 0,
+    input: 'abc'
   },
   mutations: {
-    increment (state) {
+    increment(state) {
       state.count++
+    },
+    decrement(state) {
+      state.count--
+    },
+    reverseText(state) {
+      // state.input += 'aaaaa'
+      state.input = state.input.split('').reverse().join('');
     }
   }
 })
-const Counter = {
-  template: `<div>{{ count }}</div>`,
-  computed: {
-    count () {
-      return this.$store.state.count
-    }
-  }
-}
 
 new Vue({
   el: '#app',
+  // "store" オプションで指定されたストアは、全ての子コンポーネントに注入されます
   store,
-  components: { Counter },
-  template: ` 
-  <div class="app">
-    <counter></counter>
-  </div>
-  `,
   render: h => h(App)
 })
