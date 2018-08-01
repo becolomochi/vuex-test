@@ -16,6 +16,9 @@ const store = new Vuex.Store({
     decrement(state) {
       state.count--
     },
+    updateInput (state, input) {
+      state.input = input
+    },
     reverseText(state) {
       // state.input += 'aaaaa'
       state.input = state.input.split('').reverse().join('');

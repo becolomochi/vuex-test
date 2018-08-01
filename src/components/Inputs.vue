@@ -10,8 +10,13 @@
 export default {
   name: 'inputs',
   computed: {
-    input() {
-      return this.$store.state.input
+    input: {
+      get() {
+        return this.$store.state.input
+      },
+      set(value) {
+         this.$store.commit('updateInput', value)
+      }
     }
   },
   methods: {
